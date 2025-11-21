@@ -1,0 +1,36 @@
+<div class="min-h-screen flex items-center justify-center p-4">
+  <div #formCard class="glass-card w-full max-w-3xl p-8 shadow-glow-cyan">
+    <h1 class="text-4xl font-bold font-orbitron text-neon-cyan mb-8 text-center">{{ 'New Order' }}</h1>
+    <form (ngSubmit)="submit()" class="space-y-6">
+      <select [(ngModel)]="order.supplier" name="supplier" required class="input-cyber">
+        <option value="" disabled selected>Select a supplier</option>
+        <option *ngFor="let s of suppliers" [ngValue]="s.id">{{ s.company }}</option>
+      </select>
+
+      <div class="glass-card p-6">
+        <h3 class="text-2xl font-orbitron text-neon-purple mb-4">Products</h3>
+        <div class="grid grid-cols-1 gap-4 max-h-64 overflow-y-auto">
+          <div *ngFor="let p of products" class="flex items-center gap-3 p-3 rounded-lg bg-dark-800/50 hover:bg-dark-700/70 transition-colors">
+            <input type="checkbox" [checked]="isSelected(p)" (change)="toggleProductSelection(p)" class="input-cyber-checkbox">
+            <span class="text-white grow">{{ p.name }} ({{ p.quantity }} in stock)</span>
+            <input
+              *ngIf="isSelected(p)"
+              type="number"
+              [ngModel]="getProductQuantity(p)"
+              (ngModelChange)="setProductQuantity(p, $event)"
+              name="quantity-{{p.id}}"
+              min="1"
+              class="input-cyber w-24 text-right"
+              (click)="$event.stopPropagation()"
+            >
+          </div>
+        </div>
+      </div>
+
+
+      <button type="submit" class="btn-cyber w-full">
+        {{'Create' }}
+      </button>
+    </form>
+  </div>
+</div>

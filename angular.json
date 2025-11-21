@@ -59,7 +59,8 @@
               "buildTarget": "tricol-frontend:build:production"
             },
             "development": {
-              "buildTarget": "tricol-frontend:build:development"
+              "buildTarget": "tricol-frontend:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

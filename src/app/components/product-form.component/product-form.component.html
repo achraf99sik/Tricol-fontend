@@ -1,0 +1,20 @@
+<div class="min-h-screen flex items-center justify-center p-4">
+  <div #formCard class="glass-card w-full max-w-2xl p-8 shadow-glow-cyan">
+    <h1 class="text-4xl font-bold font-orbitron text-neon-cyan mb-8 text-center">{{ id ? 'Edit Product' : 'New Product' }}</h1>
+    <form (ngSubmit)="submit()" class="space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <input type="text" placeholder="Name" [(ngModel)]="product.name" name="name" required class="input-cyber">
+        <input type="text" placeholder="Category" [(ngModel)]="product.category" name="category" class="input-cyber">
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <input type="number" placeholder="Quantity" [(ngModel)]="product.quantity" name="quantity" class="input-cyber">
+        <input type="number" placeholder="Unit Price" [(ngModel)]="product.unitPrice" name="unitPrice" step="0.01" class="input-cyber">
+      </div>
+      <textarea placeholder="Description" [(ngModel)]="product.description" name="description" class="input-cyber h-32"></textarea>
+
+      <button type="submit" class="btn-cyber w-full">
+        {{ id ? 'Update' : 'Create' }}
+      </button>
+    </form>
+  </div>
+</div>

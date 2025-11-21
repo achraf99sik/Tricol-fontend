@@ -1,0 +1,26 @@
+<nav class="glass-card p-4">
+  <div class="container mx-auto flex justify-between items-center">
+    <div class="flex items-center">
+      <h1 class="text-2xl font-bold font-orbitron text-neon-cyan">
+        <a routerLink="/">Tricol</a>
+      </h1>
+    </div>
+    <div class="hidden md:flex space-x-8">
+      <a routerLink="/suppliers" routerLinkActive="text-neon-purple" class="nav-link">Suppliers</a>
+      <a routerLink="/products" routerLinkActive="text-neon-purple" class="nav-link">Products</a>
+      <a routerLink="/stock" routerLinkActive="text-neon-purple" class="nav-link">Stock</a>
+    </div>
+    <div class="md:hidden">
+      <button #menuButton class="text-white focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div #mobileMenu class="hidden md:hidden">
+    <a routerLink="/suppliers" routerLinkActive="text-neon-purple" class="block py-2 px-4 text-sm nav-link">Suppliers</a>
+    <a routerLink="/products" routerLinkActive="text-neon-purple" class="block py-2 px-4 text-sm nav-link">Products</a>
+    <a routerLink="/stock" routerLinkActive="text-neon-purple" class="block py-2 px-4 text-sm nav-link">Stock</a>
+  </div>
+</nav>
