@@ -72,28 +72,6 @@ body {
 .btn-secondary {
   @apply inline-flex items-center justify-center px-6 py-3 bg-transparent border border-white/20 text-white font-medium uppercase tracking-wide transition-all duration-300 hover:bg-white/5 hover:border-white/40 active:scale-95;
 }
-
-.btn-danger {
-  @apply inline-flex items-center justify-center px-6 py-3 bg-red-500/10 border border-red-500/30 text-red-400 font-medium uppercase tracking-wide transition-all duration-300 hover:bg-red-500/20 hover:text-red-300 active:scale-95;
-}
-
-.input-field {
-  @apply w-full bg-[#09090b] text-white px-4 py-3 transition-all duration-300 placeholder-gray-600 relative z-10 rounded-lg;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-
-.input-field:focus {
-  @apply outline-none bg-[#000000];
-  border-color: #d1f83b;
-  box-shadow: 0 0 0 1px #d1f83b, 0 0 15px rgba(209, 248, 59, 0.1);
-}
-
-.label-text {
-  @apply block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2;
-}
-
 /* Animations */
 .aurora {
   position: absolute;
