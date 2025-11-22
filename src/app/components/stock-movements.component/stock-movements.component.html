@@ -1,22 +1,22 @@
 <div class="min-h-screen p-4 sm:p-6 lg:p-8">
   <header class="flex justify-between items-center mb-8">
-    <h1 class="text-4xl font-bold font-orbitron text-neon-cyan">Stock Movements</h1>
-    <button (click)="showForm = !showForm" class="btn-cyber">
+    <h1 class="text-4xl font-bold font-heading text-primary">Stock Movements</h1>
+    <button (click)="showForm = !showForm" class="btn-primary">
       + Add Order
     </button>
   </header>
 
   <app-order-form *ngIf="showForm" (orderCreated)="onOrderCreated()"></app-order-form>
 
-  <div *ngIf="!showForm" class="glass-card p-6 shadow-glow-cyan">
+  <div *ngIf="!showForm" class="card-ui p-6 shadow-glow-primary">
     <table class="w-full text-left">
       <thead>
         <tr class="border-b border-gray-700">
-          <th class="p-4 font-orbitron text-neon-purple">Product</th>
-          <th class="p-4 font-orbitron text-neon-purple">Type</th>
-          <th class="p-4 font-orbitron text-neon-purple">Quantity</th>
-          <th class="p-4 font-orbitron text-neon-purple">Date</th>
-          <th class="p-4 font-orbitron text-neon-purple">Order ID</th>
+          <th class="p-4 font-heading text-secondary">Product</th>
+          <th class="p-4 font-heading text-secondary">Type</th>
+          <th class="p-4 font-heading text-secondary">Quantity</th>
+          <th class="p-4 font-heading text-secondary">Date</th>
+          <th class="p-4 font-heading text-secondary">Order ID</th>
         </tr>
       </thead>
       <tbody>

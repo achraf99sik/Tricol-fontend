@@ -1,18 +1,18 @@
 <div class="min-h-screen flex items-center justify-center p-4">
-  <div #formCard class="glass-card w-full max-w-2xl p-8 shadow-glow-cyan">
-    <h1 class="text-4xl font-bold font-orbitron text-neon-cyan mb-8 text-center">{{ id ? 'Edit Product' : 'New Product' }}</h1>
+  <div #formCard class="card-ui w-full max-w-2xl p-8 shadow-glow-primary">
+    <h1 class="text-4xl font-bold font-heading text-primary mb-8 text-center">{{ id ? 'Edit Product' : 'New Product' }}</h1>
     <form (ngSubmit)="submit()" class="space-y-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <input type="text" placeholder="Name" [(ngModel)]="product.name" name="name" required class="input-cyber">
-        <input type="text" placeholder="Category" [(ngModel)]="product.category" name="category" class="input-cyber">
+        <input type="text" placeholder="Name" [(ngModel)]="product.name" name="name" required class="input-primary">
+        <input type="text" placeholder="Category" [(ngModel)]="product.category" name="category" class="input-primary">
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <input type="number" placeholder="Quantity" [(ngModel)]="product.quantity" name="quantity" class="input-cyber">
-        <input type="number" placeholder="Unit Price" [(ngModel)]="product.unitPrice" name="unitPrice" step="0.01" class="input-cyber">
+        <input type="number" placeholder="Quantity" [(ngModel)]="product.quantity" name="quantity" class="input-primary">
+        <input type="number" placeholder="Unit Price" [(ngModel)]="product.unitPrice" name="unitPrice" step="0.01" class="input-primary">
       </div>
-      <textarea placeholder="Description" [(ngModel)]="product.description" name="description" class="input-cyber h-32"></textarea>
+      <textarea placeholder="Description" [(ngModel)]="product.description" name="description" class="input-primary h-32"></textarea>
 
-      <button type="submit" class="btn-cyber w-full">
+      <button type="submit" class="btn-primary w-full">
         {{ id ? 'Update' : 'Create' }}
       </button>
     </form>

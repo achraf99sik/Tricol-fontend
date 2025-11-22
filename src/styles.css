@@ -1,75 +1,45 @@
-/* src/styles.css */
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
-/* In v4, we configure the design system right here.
-   This replaces the 'extend' block from tailwind.config.js
-*/
-@theme {
-  /* Define your Cyber Palette */
-  --color-dark-900: #050505;
-  --color-dark-800: #0a0a0f;
-  --color-dark-700: #141419;
-
-  --color-neon-cyan: #00f3ff;
-  --color-neon-purple: #bc13fe;
-  --color-neon-green: #0aff0a;
-  --color-neon-red: #ff0a3b;
-
-  /* Define Fonts */
-  --font-orbitron: 'Orbitron', sans-serif;
-  --font-inter: 'Inter', sans-serif;
-
-  /* Custom Animations (Optional) */
-  --animate-pulse-fast: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-/* Import Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@400;700&display=swap');
-
-/* Global Resets & Lenis
-*/
-html.lenis {
-  height: auto;
+:root {
+  --bg-color: #0a0a0a;
+  --text-main: #ffffff;
+  --text-muted: #888888;
+  --primary: #d1f83b; /* Electric Lime */
 }
 
 body {
-  background-color: var(--color-dark-900);
-  color: #e5e7eb;
-  font-family: var(--font-inter);
-
-  /* Cyber Grid Background */
-  background-size: 40px 40px;
-  background-image:
-    linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  font-family: 'Space Grotesk', sans-serif;
+  overflow-x: hidden;
+  cursor: default;
 }
 
-/* Utility Classes
-   (In v4, we use standard CSS syntax but can still use @apply if needed,
-    though standard CSS classes are often preferred now)
-*/
-
-.glass-card {
-  @apply bg-gray-900/60 backdrop-blur-md border border-white/10 rounded-2xl shadow-lg transition-all duration-300;
+/* The "Noise" Texture overlay for that film-grain look */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
 }
 
-.btn-cyber {
-  @apply w-full mt-4 border border-neon-cyan text-neon-cyan font-bold py-3 px-6 uppercase tracking-widest transition-all duration-300 hover:bg-neon-cyan hover:text-black text-sm;
-  font-family: var(--font-orbitron);
+/* Utility for text reveal animation */
+.reveal-text {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+.char {
+  transform: translateY(115%);
+  transition: transform 0.5s;
 }
 
-
-.input-cyber {
-  @apply w-full p-3 bg-dark-800/60 border border-white/10 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-neon-cyan transition-all duration-300;
-  font-family: var(--font-inter);
-}
-
-
-.input-cyber-checkbox {
-  @apply appearance-none h-5 w-5 bg-dark-800/60 border border-white/10 rounded-sm checked:bg-neon-cyan focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-dark-900 focus:ring-neon-cyan transition-all duration-300;
-}
-
-/* Custom Glow Shadows using standard CSS since v4 handles shadows differently */
-.shadow-glow-cyan {
-  box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
+/* Soft Aurora Background Blurs */
+.aurora {
+  position: absolute;
+  filter: blur(80px);
+  z-index: -1;
+  opacity: 0.4;
 }

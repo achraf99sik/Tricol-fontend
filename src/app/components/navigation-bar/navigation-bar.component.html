@@ -1,26 +1,42 @@
-<nav class="glass-card p-4">
-  <div class="container mx-auto flex justify-between items-center">
-    <div class="flex items-center">
-      <h1 class="text-2xl font-bold font-orbitron text-neon-cyan">
-        <a routerLink="/">Tricol</a>
-      </h1>
+<!-- navbar.component.html -->
+<nav class="fixed top-6 left-0 right-0 z-50 flex justify-center px-4">
+  <div class="glass-nav bg-[#1a1a1a]/60 backdrop-blur-xl border border-white/10 rounded-full px-8 py-4 flex justify-between items-center w-full max-w-5xl shadow-2xl">
+
+    <!-- Logo -->
+    <div class="flex items-center overflow-hidden">
+      <a routerLink="/" class="logo-text text-2xl font-bold text-white tracking-tighter relative group">
+        TRICOL<span class="text-[#d1f83b]">.</span>
+        <span class="absolute -bottom-1 left-0 w-0 h-[2px] bg-[#d1f83b] transition-all duration-300 group-hover:w-full"></span>
+      </a>
     </div>
-    <div class="hidden md:flex space-x-8">
-      <a routerLink="/suppliers" routerLinkActive="text-neon-purple" class="nav-link">Suppliers</a>
-      <a routerLink="/products" routerLinkActive="text-neon-purple" class="nav-link">Products</a>
-      <a routerLink="/stock" routerLinkActive="text-neon-purple" class="nav-link">Stock</a>
+
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex space-x-1">
+      <a routerLink="/suppliers" routerLinkActive="text-[#d1f83b]" class="nav-item relative px-5 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors rounded-full hover:bg-white/5">
+        Suppliers
+      </a>
+      <a routerLink="/products" routerLinkActive="text-[#d1f83b]" class="nav-item relative px-5 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors rounded-full hover:bg-white/5">
+        Products
+      </a>
+      <a routerLink="/stock" routerLinkActive="text-[#d1f83b]" class="nav-item relative px-5 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors rounded-full hover:bg-white/5">
+        Stock
+      </a>
     </div>
-    <div class="md:hidden">
-      <button #menuButton class="text-white focus:outline-none">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-        </svg>
+
+    <!-- CTA / Mobile Toggle -->
+    <div class="flex items-center gap-4">
+      <button class="hidden md:block px-6 py-2 bg-[#d1f83b] text-black font-bold text-sm rounded-full hover:scale-105 transition-transform duration-300">
+        Get Started
+      </button>
+
+      <button class="md:hidden text-white focus:outline-none">
+        <!-- Modern Hamburger -->
+        <div class="space-y-1.5 group">
+          <span class="block w-6 h-0.5 bg-white transition-transform group-hover:translate-x-1"></span>
+          <span class="block w-6 h-0.5 bg-[#d1f83b]"></span>
+          <span class="block w-6 h-0.5 bg-white transition-transform group-hover:-translate-x-1"></span>
+        </div>
       </button>
     </div>
-  </div>
-  <div #mobileMenu class="hidden md:hidden">
-    <a routerLink="/suppliers" routerLinkActive="text-neon-purple" class="block py-2 px-4 text-sm nav-link">Suppliers</a>
-    <a routerLink="/products" routerLinkActive="text-neon-purple" class="block py-2 px-4 text-sm nav-link">Products</a>
-    <a routerLink="/stock" routerLinkActive="text-neon-purple" class="block py-2 px-4 text-sm nav-link">Stock</a>
   </div>
 </nav>

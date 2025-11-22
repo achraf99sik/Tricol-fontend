@@ -1,17 +1,17 @@
 <div class="min-h-screen flex items-center justify-center p-4">
-  <div #formCard class="glass-card w-full max-w-3xl p-8 shadow-glow-cyan">
-    <h1 class="text-4xl font-bold font-orbitron text-neon-cyan mb-8 text-center">{{ 'New Order' }}</h1>
+  <div #formCard class="card-ui w-full max-w-3xl p-8 shadow-glow-primary">
+    <h1 class="text-4xl font-bold font-heading text-primary mb-8 text-center">{{ 'New Order' }}</h1>
     <form (ngSubmit)="submit()" class="space-y-6">
-      <select [(ngModel)]="order.supplier" name="supplier" required class="input-cyber">
+      <select [(ngModel)]="order.supplier" name="supplier" required class="input-primary">
         <option value="" disabled selected>Select a supplier</option>
         <option *ngFor="let s of suppliers" [ngValue]="s.id">{{ s.company }}</option>
       </select>
 
-      <div class="glass-card p-6">
-        <h3 class="text-2xl font-orbitron text-neon-purple mb-4">Products</h3>
+      <div class="card-ui p-6">
+        <h3 class="text-2xl font-heading text-secondary mb-4">Products</h3>
         <div class="grid grid-cols-1 gap-4 max-h-64 overflow-y-auto">
-          <div *ngFor="let p of products" class="flex items-center gap-3 p-3 rounded-lg bg-dark-800/50 hover:bg-dark-700/70 transition-colors">
-            <input type="checkbox" [checked]="isSelected(p)" (change)="toggleProductSelection(p)" class="input-cyber-checkbox">
+          <div *ngFor="let p of products" class="flex items-center gap-3 p-3 rounded-lg bg-surface/50 hover:bg-surface/70 transition-colors">
+            <input type="checkbox" [checked]="isSelected(p)" (change)="toggleProductSelection(p)" class="checkbox-primary">
             <span class="text-white grow">{{ p.name }} ({{ p.quantity }} in stock)</span>
             <input
               *ngIf="isSelected(p)"
@@ -20,7 +20,7 @@
               (ngModelChange)="setProductQuantity(p, $event)"
               name="quantity-{{p.id}}"
               min="1"
-              class="input-cyber w-24 text-right"
+              class="input-primary w-24 text-right"
               (click)="$event.stopPropagation()"
             >
           </div>
@@ -28,7 +28,7 @@
       </div>
 
 
-      <button type="submit" class="btn-cyber w-full">
+      <button type="submit" class="btn-primary w-full">
         {{'Create' }}
       </button>
     </form>

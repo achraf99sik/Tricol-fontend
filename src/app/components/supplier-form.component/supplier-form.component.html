@@ -1,19 +1,19 @@
 <div class="min-h-screen flex items-center justify-center p-4">
-  <div #formCard class="glass-card w-full max-w-2xl p-8 shadow-glow-cyan">
-    <h1 class="text-4xl font-bold font-orbitron text-neon-cyan mb-8 text-center">{{ id ? 'Edit Supplier' : 'New Supplier' }}</h1>
+  <div #formCard class="card-ui w-full max-w-2xl p-8 shadow-glow-primary">
+    <h1 class="text-4xl font-bold font-heading text-primary mb-8 text-center">{{ id ? 'Edit Supplier' : 'New Supplier' }}</h1>
     <form (ngSubmit)="submit()" class="space-y-6">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <input type="text" placeholder="Company" [(ngModel)]="supplier.company" name="company" required class="input-cyber">
-        <input type="text" placeholder="Contact" [(ngModel)]="supplier.contact" name="contact" required class="input-cyber">
+        <input type="text" placeholder="Company" [(ngModel)]="supplier.company" name="company" required class="input-primary">
+        <input type="text" placeholder="Contact" [(ngModel)]="supplier.contact" name="contact" required class="input-primary">
       </div>
-      <input type="email" placeholder="Email" [(ngModel)]="supplier.email" name="email" required class="input-cyber">
+      <input type="email" placeholder="Email" [(ngModel)]="supplier.email" name="email" required class="input-primary">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <input type="text" placeholder="Phone" [(ngModel)]="supplier.phone" name="phone" class="input-cyber">
-        <input type="text" placeholder="City" [(ngModel)]="supplier.city" name="city" class="input-cyber">
+        <input type="text" placeholder="Phone" [(ngModel)]="supplier.phone" name="phone" class="input-primary">
+        <input type="text" placeholder="City" [(ngModel)]="supplier.city" name="city" class="input-primary">
       </div>
-      <input type="number" placeholder="ICE" [(ngModel)]="supplier.ice" name="ice" class="input-cyber">
+      <input type="number" placeholder="ICE" [(ngModel)]="supplier.ice" name="ice" class="input-primary">
 
-      <button type="submit" class="btn-cyber w-full">
+      <button type="submit" class="btn-primary w-full">
         {{ id ? 'Update' : 'Create' }}
       </button>
     </form>
