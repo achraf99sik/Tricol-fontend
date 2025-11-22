@@ -1,22 +1,97 @@
-<div class="min-h-screen p-4 sm:p-6 lg:p-8">
-  <header class="flex justify-between items-center mb-8">
-    <h1 class="text-4xl font-bold font-heading text-primary">Products</h1>
-    <a routerLink="/products/new" class="btn-primary">
+<div class="min-h-screen w-full pt-24 pb-10 px-4 md:px-10 relative z-10">
+  <!-- Header -->
+  <header
+    class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-white/10 pb-6"
+  >
+    <div>
+      <h1
+        class="text-5xl md:text-7xl font-bold text-white tracking-tighter mb-2"
+      >
+        INVENTORY<span class="text-[#d1f83b]">.</span>
+      </h1>
+      <p class="text-gray-400 max-w-md">
+        Real-time tracking of your product catalog.
+      </p>
+    </div>
+    <a routerLink="/products/new" class="btn-primary mt-6 md:mt-0">
       + Add Product
     </a>
   </header>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    <div *ngFor="let p of products" #productCard [id]="p.id!" class="card-ui p-6 flex flex-col justify-between hover:border-primary shadow-glow-primary">
-      <div>
-        <h2 class="text-2xl font-bold font-heading text-secondary mb-2">{{ p.name }}</h2>
-        <p class="text-gray-300 mb-1">{{ p.category }} | {{ p.quantity }} in stock</p>
-        <p class="text-gray-400 text-sm">Price: ${{ p.unitPrice }}</p>
+  <!-- Grid Container -->
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+  >
+    <div
+      *ngFor="let p of products; let i = index"
+      #productCard
+      [id]="p.id!"
+      class="group glass-panel p-6 rounded-2xl hover:bg-white/5 transition-all duration-300 relative overflow-hidden flex flex-col justify-between h-[280px]"
+    >
+      <!-- Background Gradient -->
+      <div
+        class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+      ></div>
+
+      <!-- Top Section -->
+      <div class="relative z-10">
+        <div class="flex justify-between items-start mb-4">
+          <span
+            class="px-2 py-1 text-[10px] font-bold uppercase tracking-wider bg-white/10 rounded text-gray-300"
+            >{{ p.category || "Uncategorized" }}</span
+          >
+          <span class="text-[#d1f83b] font-mono font-bold"
+            >${{ p.unitPrice }}</span
+          >
+        </div>
+        <h3
+          class="text-2xl font-bold text-white mb-2 line-clamp-2 group-hover:text-[#d1f83b] transition-colors"
+        >
+          {{ p.name }}
+        </h3>
+        <p class="text-sm text-gray-400 line-clamp-2">
+          {{ p.description || "No description available." }}
+        </p>
       </div>
-      <div class="mt-6 flex gap-4">
-        <a [routerLink]="['/products/edit', p.id]" class="btn-primary w-1/2">Edit</a>
-        <button (click)="deleteProduct(p.id!)" class="btn-danger w-1/2">Delete</button>
+
+      <!-- Bottom Section -->
+      <div class="relative z-10 mt-auto">
+        <!-- Stock Indicator -->
+        <div class="mb-4">
+          <div class="flex justify-between text-xs mb-1">
+            <span class="text-gray-400">Stock Level</span>
+            <span class="font-mono text-white">{{ p.quantity }} units</span>
+          </div>
+          <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+            <div
+              class="h-full bg-[#d1f83b] transition-all duration-1000 ease-out"
+              [style.width.%]="(p.quantity / 100) * 100"
+            ></div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div
+          class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0"
+        >
+          <a
+            [routerLink]="['/products/edit', p.id]"
+            class="flex-1 btn-secondary py-2 text-xs"
+            >Edit</a
+          >
+          <button
+            (click)="deleteProduct(p.id!)"
+            class="flex-1 btn-danger py-2 text-xs"
+          >
+            Delete
+          </button>
+        </div>
       </div>
     </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="products.length === 0" class="py-20 text-center text-gray-500">
+    <p>No products found in the inventory.</p>
   </div>
 </div>

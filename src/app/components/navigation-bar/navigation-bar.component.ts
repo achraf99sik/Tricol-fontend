@@ -12,8 +12,10 @@ export class NavigationBarComponent implements AfterViewInit {
   @ViewChild('mobileMenu') mobileMenu!: ElementRef;
 
   ngAfterViewInit() {
-    this.menuButton.nativeElement.addEventListener('click', () => {
-      this.mobileMenu.nativeElement.classList.toggle('hidden');
-    });
+    if (this.menuButton?.nativeElement && this.mobileMenu?.nativeElement) {
+      this.menuButton.nativeElement.addEventListener('click', () => {
+        this.mobileMenu.nativeElement.classList.toggle('hidden');
+      });
+    }
   }
 }

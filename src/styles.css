@@ -1,45 +1,104 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --bg-color: #0a0a0a;
+  --bg-color: #050505;
   --text-main: #ffffff;
-  --text-muted: #888888;
+  --text-muted: #a1a1aa;
   --primary: #d1f83b; /* Electric Lime */
+  --primary-dim: #b5d932;
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --danger: #ff4d4d;
 }
 
 body {
   background-color: var(--bg-color);
   color: var(--text-main);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   overflow-x: hidden;
   cursor: default;
 }
 
-/* The "Noise" Texture overlay for that film-grain look */
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-color);
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* The "Noise" Texture overlay */
 .noise-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 9999;
 }
 
-/* Utility for text reveal animation */
-.reveal-text {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-}
-.char {
-  transform: translateY(115%);
-  transition: transform 0.5s;
+/* Utility Classes */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
 }
 
-/* Soft Aurora Background Blurs */
+.btn-primary {
+  @apply inline-flex items-center justify-center px-6 py-3 bg-[#d1f83b] text-black font-bold uppercase tracking-wide transition-all duration-300 hover:bg-[#b5d932] hover:scale-[1.02] active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed;
+  clip-path: polygon(
+    10px 0,
+    100% 0,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    0 100%,
+    0 10px
+  );
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center px-6 py-3 bg-transparent border border-white/20 text-white font-medium uppercase tracking-wide transition-all duration-300 hover:bg-white/5 hover:border-white/40 active:scale-95;
+}
+
+.btn-danger {
+  @apply inline-flex items-center justify-center px-6 py-3 bg-red-500/10 border border-red-500/30 text-red-400 font-medium uppercase tracking-wide transition-all duration-300 hover:bg-red-500/20 hover:text-red-300 active:scale-95;
+}
+
+.input-field {
+  @apply w-full bg-[#09090b] text-white px-4 py-3 transition-all duration-300 placeholder-gray-600 relative z-10 rounded-lg;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.input-field:focus {
+  @apply outline-none bg-[#000000];
+  border-color: #d1f83b;
+  box-shadow: 0 0 0 1px #d1f83b, 0 0 15px rgba(209, 248, 59, 0.1);
+}
+
+.label-text {
+  @apply block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2;
+}
+
+/* Animations */
 .aurora {
   position: absolute;
   filter: blur(80px);
   z-index: -1;
   opacity: 0.4;
+  pointer-events: none;
 }

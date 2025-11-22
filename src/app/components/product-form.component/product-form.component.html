@@ -1,20 +1,207 @@
-<div class="min-h-screen flex items-center justify-center p-4">
-  <div #formCard class="card-ui w-full max-w-2xl p-8 shadow-glow-primary">
-    <h1 class="text-4xl font-bold font-heading text-primary mb-8 text-center">{{ id ? 'Edit Product' : 'New Product' }}</h1>
-    <form (ngSubmit)="submit()" class="space-y-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <input type="text" placeholder="Name" [(ngModel)]="product.name" name="name" required class="input-primary">
-        <input type="text" placeholder="Category" [(ngModel)]="product.category" name="category" class="input-primary">
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <input type="number" placeholder="Quantity" [(ngModel)]="product.quantity" name="quantity" class="input-primary">
-        <input type="number" placeholder="Unit Price" [(ngModel)]="product.unitPrice" name="unitPrice" step="0.01" class="input-primary">
-      </div>
-      <textarea placeholder="Description" [(ngModel)]="product.description" name="description" class="input-primary h-32"></textarea>
+<div
+  class="min-h-screen w-full flex items-center justify-center p-4 relative z-10 pt-20"
+>
+  <div
+    #formCard
+    class="w-full max-w-2xl glass-panel p-10 rounded-2xl relative overflow-hidden"
+  >
+    <!-- Background Glow -->
+    <div
+      class="absolute top-0 right-0 w-64 h-64 bg-[#d1f83b]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"
+    ></div>
 
-      <button type="submit" class="btn-primary w-full">
-        {{ id ? 'Update' : 'Create' }}
-      </button>
+    <div class="flex items-center gap-4 mb-8">
+      <div
+        class="w-12 h-12 rounded-full bg-[#d1f83b]/10 flex items-center justify-center text-[#d1f83b]"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+          ></path>
+        </svg>
+      </div>
+      <div>
+        <h1 class="text-3xl font-bold text-white">
+          {{ id ? "Edit Product" : "New Product" }}
+        </h1>
+        <p class="text-gray-400 text-sm">
+          Manage your product catalog details.
+        </p>
+      </div>
+    </div>
+
+    <form (ngSubmit)="submit()" class="space-y-6 relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="group">
+          <label class="label-text">Product Name</label>
+          <div class="relative">
+            <div
+              class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"
+                ></path>
+              </svg>
+            </div>
+            <input
+              type="text"
+              [(ngModel)]="product.name"
+              name="name"
+              required
+              class="input-field rounded-lg pl-10"
+              placeholder="e.g. Wireless Mouse"
+            />
+          </div>
+        </div>
+        <div class="group">
+          <label class="label-text">Category</label>
+          <div class="relative">
+            <div
+              class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+                ></path>
+              </svg>
+            </div>
+            <input
+              type="text"
+              [(ngModel)]="product.category"
+              name="category"
+              class="input-field rounded-lg pl-10"
+              placeholder="e.g. Electronics"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="group">
+          <label class="label-text">Initial Quantity</label>
+          <div class="relative">
+            <div
+              class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
+                ></path>
+              </svg>
+            </div>
+            <input
+              type="number"
+              [(ngModel)]="product.quantity"
+              name="quantity"
+              class="input-field rounded-lg pl-10"
+              placeholder="0"
+            />
+          </div>
+        </div>
+        <div class="group">
+          <label class="label-text">Unit Price ($)</label>
+          <div class="relative">
+            <div
+              class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-500"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                ></path>
+              </svg>
+            </div>
+            <input
+              type="number"
+              [(ngModel)]="product.unitPrice"
+              name="unitPrice"
+              step="0.01"
+              class="input-field rounded-lg pl-10"
+              placeholder="0.00"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="group">
+        <label class="label-text">Description</label>
+        <div class="relative">
+          <div class="absolute top-3 left-3 pointer-events-none text-gray-500">
+            <svg
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h7"
+              ></path>
+            </svg>
+          </div>
+          <textarea
+            [(ngModel)]="product.description"
+            name="description"
+            class="input-field rounded-lg h-32 resize-none pl-10"
+            placeholder="Enter product description..."
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="flex gap-4 pt-4">
+        <button
+          type="button"
+          (click)="cancel()"
+          class="btn-secondary w-full rounded-lg"
+        >
+          Cancel
+        </button>
+        <button type="submit" class="btn-primary w-full rounded-lg">
+          {{ id ? "Update Product" : "Create Product" }}
+        </button>
+      </div>
     </form>
   </div>
 </div>
