@@ -19,79 +19,83 @@
   </header>
 
   <!-- Grid Container -->
-  <div
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-  >
+  <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+
+  <ng-container *ngIf="!isLoading">
     <div
-      *ngFor="let p of products; let i = index"
-      #productCard
-      [id]="p.id!"
-      class="group glass-panel p-6 rounded-2xl hover:bg-white/5 transition-all duration-300 relative overflow-hidden flex flex-col justify-between h-[280px]"
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
     >
-      <!-- Background Gradient -->
       <div
-        class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-      ></div>
-
-      <!-- Top Section -->
-      <div class="relative z-10">
-        <div class="flex justify-between items-start mb-4">
-          <span
-            class="px-2 py-1 text-[10px] font-bold uppercase tracking-wider bg-white/10 rounded text-gray-300"
-            >{{ p.category || "Uncategorized" }}</span
-          >
-          <span class="text-[#d1f83b] font-mono font-bold"
-            >${{ p.unitPrice }}</span
-          >
-        </div>
-        <h3
-          class="text-2xl font-bold text-white mb-2 line-clamp-2 group-hover:text-[#d1f83b] transition-colors"
-        >
-          {{ p.name }}
-        </h3>
-        <p class="text-sm text-gray-400 line-clamp-2">
-          {{ p.description || "No description available." }}
-        </p>
-      </div>
-
-      <!-- Bottom Section -->
-      <div class="relative z-10 mt-auto">
-        <!-- Stock Indicator -->
-        <div class="mb-4">
-          <div class="flex justify-between text-xs mb-1">
-            <span class="text-gray-400">Stock Level</span>
-            <span class="font-mono text-white">{{ p.quantity }} units</span>
-          </div>
-          <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
-            <div
-              class="h-full bg-[#d1f83b] transition-all duration-1000 ease-out"
-              [style.width.%]="(p.quantity / 100) * 100"
-            ></div>
-          </div>
-        </div>
-
-        <!-- Actions -->
+        *ngFor="let p of products; let i = index"
+        #productCard
+        [id]="p.id!"
+        class="group glass-panel p-6 rounded-2xl hover:bg-white/5 transition-all duration-300 relative overflow-hidden flex flex-col justify-between h-[280px]"
+      >
+        <!-- Background Gradient -->
         <div
-          class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0"
-        >
-          <a
-            [routerLink]="['/products/edit', p.id]"
-            class="flex-1 btn-secondary py-2 text-xs"
-            >Edit</a
+          class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        ></div>
+
+        <!-- Top Section -->
+        <div class="relative z-10">
+          <div class="flex justify-between items-start mb-4">
+            <span
+              class="px-2 py-1 text-[10px] font-bold uppercase tracking-wider bg-white/10 rounded text-gray-300"
+              >{{ p.category || "Uncategorized" }}</span
+            >
+            <span class="text-[#d1f83b] font-mono font-bold"
+              >${{ p.unitPrice }}</span
+            >
+          </div>
+          <h3
+            class="text-2xl font-bold text-white mb-2 line-clamp-2 group-hover:text-[#d1f83b] transition-colors"
           >
-          <button
-            (click)="deleteProduct(p.id!)"
-            class="flex-1 btn-danger py-2 text-xs"
+            {{ p.name }}
+          </h3>
+          <p class="text-sm text-gray-400 line-clamp-2">
+            {{ p.description || "No description available." }}
+          </p>
+        </div>
+
+        <!-- Bottom Section -->
+        <div class="relative z-10 mt-auto">
+          <!-- Stock Indicator -->
+          <div class="mb-4">
+            <div class="flex justify-between text-xs mb-1">
+              <span class="text-gray-400">Stock Level</span>
+              <span class="font-mono text-white">{{ p.quantity }} units</span>
+            </div>
+            <div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+              <div
+                class="h-full bg-[#d1f83b] transition-all duration-1000 ease-out"
+                [style.width.%]="(p.quantity / 100) * 100"
+              ></div>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div
+            class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0"
           >
-            Delete
-          </button>
+            <a
+              [routerLink]="['/products/edit', p.id]"
+              class="flex-1 btn-secondary py-2 text-xs"
+              >Edit</a
+            >
+            <button
+              (click)="deleteProduct(p.id!)"
+              class="flex-1 btn-danger py-2 text-xs"
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Empty State -->
-  <div *ngIf="products.length === 0" class="py-20 text-center text-gray-500">
-    <p>No products found in the inventory.</p>
-  </div>
+    <!-- Empty State -->
+    <div *ngIf="products.length === 0" class="py-20 text-center text-gray-500">
+      <p>No products found in the inventory.</p>
+    </div>
+  </ng-container>
 </div>

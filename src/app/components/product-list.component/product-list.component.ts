@@ -12,15 +12,17 @@ import { CommonModule } from '@angular/common';
 import { ProductDto } from '../../interfaces/api.interface';
 import { AnimationService } from '../../services/animation.service';
 
+import { LoadingSpinnerComponent } from '../shared/loading-spinner/loading-spinner.component';
 import gsap from 'gsap';
 
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, LoadingSpinnerComponent],
 })
 export class ProductListComponent implements OnInit, AfterViewInit {
   products: ProductDto[] = [];
+  isLoading = true;
 
   @ViewChildren('productCard') productCards!: QueryList<ElementRef>;
 
@@ -34,18 +36,34 @@ export class ProductListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    // Animate initial items if they exist
+    if (this.productCards.length > 0) {
+      this.animateCards(this.productCards.map((c) => c.nativeElement));
+    }
+
     this.productCards.changes.subscribe(() => {
-      gsap.fromTo(
-        this.productCards.map((c) => c.nativeElement),
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, stagger: 0.05, duration: 0.5, ease: 'power2.out' }
-      );
+      this.animateCards(this.productCards.map((c) => c.nativeElement));
     });
   }
 
+  private animateCards(elements: HTMLElement[]) {
+    gsap.fromTo(
+      elements,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, stagger: 0.05, duration: 0.5, ease: 'power2.out' }
+    );
+  }
+
   fetchProducts() {
-    this.api.getProducts().subscribe((res) => {
-      this.products = res;
+    this.isLoading = true;
+    this.api.getProducts().subscribe({
+      next: (res) => {
+        this.products = res;
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
+      },
     });
   }
 

@@ -11,14 +11,17 @@ import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { SupplierDto } from '../../interfaces/api.interface';
 import { AnimationService } from '../../services/animation.service';
+import { LoadingSpinnerComponent } from '../shared/loading-spinner/loading-spinner.component';
+import gsap from 'gsap';
 
 @Component({
   selector: 'app-supplier-list',
   templateUrl: './supplier-list.component.html',
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, LoadingSpinnerComponent],
 })
 export class SupplierListComponent implements OnInit, AfterViewInit {
   suppliers: SupplierDto[] = [];
+  isLoading = true;
 
   @ViewChildren('supplierRow') supplierRows!: QueryList<ElementRef>;
 
@@ -32,19 +35,34 @@ export class SupplierListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    // Animate initial items if they exist
+    if (this.supplierRows.length > 0) {
+      this.animateRows(this.supplierRows.map((r) => r.nativeElement));
+    }
+
     this.supplierRows.changes.subscribe(() => {
-      // Stagger animate rows in
-      gsap.fromTo(
-        this.supplierRows.map((r) => r.nativeElement),
-        { opacity: 0, x: -20 },
-        { opacity: 1, x: 0, stagger: 0.05, duration: 0.4, ease: 'power2.out' }
-      );
+      this.animateRows(this.supplierRows.map((r) => r.nativeElement));
     });
   }
 
+  private animateRows(elements: HTMLElement[]) {
+    gsap.fromTo(
+      elements,
+      { opacity: 0, x: -20 },
+      { opacity: 1, x: 0, stagger: 0.05, duration: 0.4, ease: 'power2.out' }
+    );
+  }
+
   loadSuppliers() {
-    this.api.getSuppliers().subscribe((res) => {
-      this.suppliers = res;
+    this.isLoading = true;
+    this.api.getSuppliers().subscribe({
+      next: (res) => {
+        this.suppliers = res;
+        this.isLoading = false;
+      },
+      error: () => {
+        this.isLoading = false;
+      },
     });
   }
 
